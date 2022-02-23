@@ -8,6 +8,6 @@ module.exports = async (req, res, next) => {
   if (!quantity) {
     return res.status(400).json({ message: '"quantity" is required' });
   }
-
+  
   next();
 };
