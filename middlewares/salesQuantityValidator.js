@@ -4,7 +4,7 @@ module.exports = async (productsArray) => {
   if (invalidQuantityProduct) {
     return {
      codigo: 422,
-     message: "\"quantity\" must be greater than or equal to 1" };
+     message: '\"quantity\" must be greater than or equal to 1' };
   }
   return false;
 };

@@ -3,7 +3,7 @@ module.exports = async (productsArray) => {
   if (!productFound) {
     return {
       codigo: 400,
-      message: "\"productId\" is required" };
+      message: '\"productId\" is required' };
     }
     return false;
 };
