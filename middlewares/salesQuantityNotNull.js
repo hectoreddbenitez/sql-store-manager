@@ -4,7 +4,7 @@ module.exports = async (productsArray) => {
   if (productSemQuantity) {
     return {
       codigo: 400,
-      message: '\"quantity\" is required' };
+      message: '"quantity" is required' };
   }
   return false;
 };
