@@ -8,6 +8,7 @@ const sales = async (req, res) => {
     if (typeof response.message === 'string') {
       return res.status(response.codigo).json({ message: response.message });
     }
+    console.log(response);
     return res.status(201).json(response);
   } catch (err) {
     // console.log(err);
