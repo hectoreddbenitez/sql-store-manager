@@ -1,4 +1,4 @@
-const nameValidator = async (req, res, next) => {
+const nameValidator = (req, res, next) => {
   const CINCO = 5;
   const { name } = req.body;
   if (!name) {
@@ -11,7 +11,7 @@ const nameValidator = async (req, res, next) => {
   next();
 };
 
-const quantityValidator = async (req, res, next) => {
+const quantityValidator = (req, res, next) => {
   const ZERO = 0;
   const { quantity } = req.body;
   if (quantity <= ZERO || typeof (quantity) === 'string') {
