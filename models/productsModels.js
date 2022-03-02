@@ -12,7 +12,7 @@ const create = async (name, quantity) => {
   return response;
 };
 
-const searchProduct = async (name) => {
+const findByName = async (name) => {
   const [productExist] = await connection
   .execute('SELECT * FROM StoreManager.products WHERE name = ?',
   [name]);
@@ -49,7 +49,7 @@ const deleteProduct = async (id) => {
 
 module.exports = {
   create,
-  searchProduct,
+  findByName,
   findAll,
   findById,
   updateProduct,

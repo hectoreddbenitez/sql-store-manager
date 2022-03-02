@@ -10,6 +10,7 @@ const salesRegistrer = async (date) => {
 };
 
 const salesProductRegistrer = async (salesId, productId, quantity) => {
+  console.log('esta chegando no model SPR');
   const [saledproductRegister] = await connection
     .query('INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
     [salesId, productId, quantity]);

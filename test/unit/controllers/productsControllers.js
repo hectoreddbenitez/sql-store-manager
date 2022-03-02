@@ -69,53 +69,53 @@ describe(' Testando endpoint para cadastro de produtos',()=> {
   })
 });
 
-// describe(' Testando endpoint para listagem de produtos',()=> {
-//   describe('Quando tem produtos cadastrados', () => {
-//     const response = {};
+describe(' Testando endpoint para listagem de produtos',()=> {
+  describe('Quando tem produtos cadastrados', () => {
+    const response = {};
+    const request = {};
 
-//     before(() => {
-//       sinon.stub(productServices, 'findAll')
-//         .resolves([[
-//           {
-//             "id": 1,
-//             "name": "produto A",
-//             "quantity": 10
-//           },
-//           {
-//             "id": 2,
-//             "name": "produto B",
-//             "quantity": 20
-//           }
-//         ]]);
-//       response.status = sinon.stub().returns(response);
-//       response.json = sinon.stub().returns();
-//     })
+    before(() => {
+      sinon.stub(productServices, 'findAll')
+        .resolves({
+          codigo: 200,
+          message:[{
+            "id": 1,
+            "name": "produto A",
+            "quantity": 10
+          },
+          {
+            "id": 2,
+            "name": "produto B",
+            "quantity": 20
+          }
+        ]});
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns();
+    })
 
-//     after(() => {
-//       productServices.findAll.restore();
-//     });
+    after(() => {
+      productServices.findAll.restore();
+    });
 
-//     it('responder com status 200', async () => {
-//      const response = await productsControllers.findAll();
-//       console.log('====>',response);
-//       expect(response.status.calledWith(200)).to.be.equal(true);
-//     })
+    it('responder com status 200', async () => {
+      await productsControllers.findAll(request, response);
+      expect(response.status.calledWith(200)).to.be.equal(true);
+    })
 
-//     it('é chamado o json com um array dos produtos cadastrados', async () => {
-//       const response = await productsControllers.findAll();
+    it('é chamado o json com um array dos produtos cadastrados', async () => {
+      await productsControllers.findAll(request, response);
 
-//       expect(response.json.calledWith([[
-//         {
-//           "id": 1,
-//           "name": "produto A",
-//           "quantity": 10
-//         },
-//         {
-//           "id": 2,
-//           "name": "produto B",
-//           "quantity": 20
-//         }
-//       ]])).to.be.equal(true);
-//     });
-//   });
-// });
+      expect(response.json.calledWith([{
+        "id": 1,
+        "name": "produto A",
+        "quantity": 10
+      },
+      {
+        "id": 2,
+        "name": "produto B",
+        "quantity": 20
+      }
+    ])).to.be.equal(true);
+    });
+  });
+});

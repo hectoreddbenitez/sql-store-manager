@@ -4,8 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const productsControllers = require('./controllers/productsControllers');
 const salesControllers = require('./controllers/salesControllers');
-const quantityMiddleware = require('./middlewares/productQuantityMiddleware');
-const nameMiddleware = require('./middlewares/productNameMiddleware');
+const salesMiddleware = require('./middlewares/salesMiddleware');
+const productsMiddleware = require('./middlewares/productsMiddleware');
 
 const app = express();
 
@@ -18,13 +18,14 @@ app.get('/', (_request, response) => {
 
 app.get('/sales', salesControllers.getSales);
 app.get('/sales/:id', salesControllers.getSalesById);
+app.use('/sales',...salesMiddleware);
 app.post('/sales', salesControllers.sales);
 app.put('/sales/:id', salesControllers.updateSale);
 
 app.get('/products', productsControllers.findAll);
 app.get('/products/:id', productsControllers.findById);
 app.delete('/products/:id', productsControllers.deleteProduct);
-app.use(nameMiddleware, quantityMiddleware);
+app.use('/products', ...productsMiddleware);
 app.post('/products', productsControllers.create);
 app.put('/products/:id', productsControllers.updateProduct);
 

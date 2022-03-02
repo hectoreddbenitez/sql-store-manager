@@ -1,23 +1,25 @@
 const salesModel = require('../models/salesModels');
-const quantityValidator = require('../middlewares/salesQuantityValidator');
-const idValidator = require('../middlewares/salesIdValidator');
-const existId = require('../middlewares/existId');
-const quantityNotNull = require('../middlewares/salesQuantityNotNull');
+const productsModels = require('../models/productsModels');
+const e = require('express');
 
-const paramsValidator = async (productsArray) => {
-  const notValidId = await idValidator(productsArray);
-  if (notValidId) return notValidId;
-  const isValidId = await existId(productsArray);
-  if (isValidId) return isValidId;
-  const notNullQuantity = await quantityNotNull(productsArray);
-  if (notNullQuantity) return notNullQuantity;
-  const notValidQuantity = await quantityValidator(productsArray);
-  if (notValidQuantity) return notValidQuantity;
+
+
+const idValidator = async (response) => {
+ const responseEvery = await response.every((e) => e.length !== 0)
+   if (!responseEvery) {
+     return {
+        codigo: 404,
+        message: 'Product not found',
+     };
+   }
 };
 
 const salesRegistrer = async (productsArray) => {
-  const response = await paramsValidator(productsArray);
-  if (response) return response;
+  const responseMap = await productsArray.map(async (product) => productsModels.findById(product.productId));
+  const promiseSolvedResponseMap = await Promise.all(responseMap)
+  const notValidId = await idValidator(promiseSolvedResponseMap);
+  if (notValidId) return notValidId;
+
   const { id } = await salesModel.salesRegistrer(new Date());
   // CUIDADO!!! num array de promises tem que esperar todas as promises. Deve ser utilizado Promise.all!
   await Promise.all(productsArray.map(async ({ productId, quantity }) => salesModel
@@ -48,8 +50,10 @@ const getSalesById = async (id) => {
 };
 
 const updateSale = async (id, productsArray) => {
-  const response = await paramsValidator(productsArray);
-  if (response) return response;
+  const responseMap = await productsArray.map(async (product) => productsModels.findById(product.productId));
+  const promiseSolvedResponseMap = await Promise.all(responseMap)
+  const notValidId = await idValidator(promiseSolvedResponseMap);
+  if (notValidId) return notValidId;
 
   await Promise.all(productsArray
   .map(async ({ productId, quantity }) => salesModel.updateSale(id, productId, quantity)));

@@ -9,7 +9,7 @@ describe('Testando camada Service, CREATE PRODUTO', () => {
     const request = {};
   
     before(() => {
-      sinon.stub(productModels, 'searchProduct').resolves([]);
+      sinon.stub(productModels, 'findByName').resolves([]);
       sinon.stub(productModels, 'create')
         .resolves({
           id: 1,

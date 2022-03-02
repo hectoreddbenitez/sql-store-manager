@@ -74,51 +74,51 @@ describe('Testando LISTAGEM DE PRODUTOS', () => {
     });
 })
 
-describe('Testando camada de models, PROCURA PRODUTOS PELO "Id"', () => {
-  describe('Quando não tem produtos cadastrados', () => {
-    const payloadProduct = {id: 30};
+// describe('Testando camada de models, PROCURA PRODUTOS PELO "Id"', () => {
+  // describe('Quando não tem produtos cadastrados', () => {
+  //   const payloadProduct = {id: 30};
 
-    before(async () => {
-      const execute = [[]]; // retorno esperado nesse teste
-      sinon.stub(connection, 'execute').resolves(execute);
-    });
-    // Restaurando a função `execute` original após os teste.
-    after(async () => {
-      connection.execute.restore();
-    });
+  //   before(async () => {
+  //     const execute = [[]]; // retorno esperado nesse teste
+  //     sinon.stub(connection, 'execute').resolves(execute);
+  //   });
+  //   // Restaurando a função `execute` original após os teste.
+  //   after(async () => {
+  //     connection.execute.restore();
+  //   });
 
-    it('responder com um array vazio', async () => {
-      const response = await productsModels.findById(payloadProduct.id);
-      console.log(response)
+  //   it('responder com um array vazio', async () => {
+  //     const response = await productsModels.findById(payloadProduct.id);
+  //     console.log(response)
 
-      expect(response).to.be.an('array');
-      expect(response).to.be.empty;
-    })
-  })
+  //     expect(response).to.be.an('array');
+  //     expect(response).to.be.empty;
+  //   })
+  // })
 
-  describe('Quando o id informado, corresponde com o de algum produto cadastrado', () => {
-  const payloadProduct = {id: 12};
+//   describe('Quando o id informado, corresponde com o de algum produto cadastrado', () => {
+//   const payloadProduct = {id: 12};
 
-    before(async () => {
-      const execute = [[{ id: 12, name: 'Morango', quantity: 50 }]]; // retorno esperado nesse teste
-      sinon.stub(connection, 'execute').resolves(execute);
-    });
-    // Restaurando a função `execute` original após os teste.
-    after(async () => {
-      connection.execute.restore();
-    });
+//     before(async () => {
+//       const execute = [[{ id: 12, name: 'Morango', quantity: 50 }]]; // retorno esperado nesse teste
+//       sinon.stub(connection, 'execute').resolves(execute);
+//     });
+//     // Restaurando a função `execute` original após os teste.
+//     after(async () => {
+//       connection.execute.restore();
+//     });
 
-    it('responder com um array com o produto cadastrado', async () => {
-      const response = await productsModels.findById(payloadProduct.id);
-      console.log(response)
+//     it('responder com um array com o produto cadastrado', async () => {
+//       const response = await productsModels.findById(payloadProduct.id);
+//       console.log(response)
 
-      expect(response).to.be.an('array');
-      expect(response[0]).to.have.a.property('id', 12);
-      expect(response[0]).to.have.a.property('name', 'Morango');
-      expect(response[0]).to.have.a.property('quantity', 50);
-    })
-  })
-})
+//       expect(response).to.be.an('array');
+//       expect(response[0]).to.have.a.property('id', 12);
+//       expect(response[0]).to.have.a.property('name', 'Morango');
+//       expect(response[0]).to.have.a.property('quantity', 50);
+//     })
+//   })
+// })
 
 describe('Testando camada de models, UPDATE DE PRODUTOS', () => {
     describe('Quando o id informado, corresponde com o de algum produto cadastrado', () => {
