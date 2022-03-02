@@ -18,7 +18,7 @@ app.get('/', (_request, response) => {
 
 app.get('/sales', salesControllers.getSales);
 app.get('/sales/:id', salesControllers.getSalesById);
-app.use('/sales',...salesMiddleware);
+app.use('/sales', ...salesMiddleware);
 app.post('/sales', salesControllers.sales);
 app.put('/sales/:id', salesControllers.updateSale);
 

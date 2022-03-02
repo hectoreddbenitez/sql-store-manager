@@ -1,22 +1,20 @@
 const salesModel = require('../models/salesModels');
 const productsModels = require('../models/productsModels');
-const e = require('express');
-
-
 
 const idValidator = async (response) => {
- const responseEvery = await response.every((e) => e.length !== 0)
+ const responseEvery = await response.every((e) => e.length !== 0);
    if (!responseEvery) {
      return {
         codigo: 404,
         message: 'Product not found',
-     };
+     }; 
    }
 };
 
 const salesRegistrer = async (productsArray) => {
-  const responseMap = await productsArray.map(async (product) => productsModels.findById(product.productId));
-  const promiseSolvedResponseMap = await Promise.all(responseMap)
+  const responseMap = await productsArray
+  .map(async (product) => productsModels.findById(product.productId));
+  const promiseSolvedResponseMap = await Promise.all(responseMap);
   const notValidId = await idValidator(promiseSolvedResponseMap);
   if (notValidId) return notValidId;
 
@@ -50,8 +48,9 @@ const getSalesById = async (id) => {
 };
 
 const updateSale = async (id, productsArray) => {
-  const responseMap = await productsArray.map(async (product) => productsModels.findById(product.productId));
-  const promiseSolvedResponseMap = await Promise.all(responseMap)
+  const responseMap = await productsArray
+  .map(async (product) => productsModels.findById(product.productId));
+  const promiseSolvedResponseMap = await Promise.all(responseMap);
   const notValidId = await idValidator(promiseSolvedResponseMap);
   if (notValidId) return notValidId;
 

@@ -8,7 +8,6 @@ const create = async (req, res) => {
 
 const findAll = async (_req, res) => {
   const response = await productService.findAll();
-  console.log({response});
   res.status(response.codigo).json(response.message);
 };
 

@@ -1,11 +1,10 @@
 const productModels = require('../models/productsModels');
 
 const create = async (name, quantity) => {
-  
-const response = await productModels.findByName(name)
+const response = await productModels.findByName(name);
 if (response.length !== 0) {
   return { 
-    codigo: 409,
+    codigo: 409, 
     message: { message: 'Product already exists' },
    };
 }

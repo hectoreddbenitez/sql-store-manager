@@ -27,5 +27,5 @@ const quantityValidator = async (req, res, next) => {
 
 module.exports = [
   nameValidator,
-  quantityValidator
-]
+  quantityValidator,
+];
