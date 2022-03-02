@@ -1,10 +1,10 @@
 // const { json } = require('body-parse
 const salesService = require('../services/salesServices');
 
-const sales = async (req, res) => {
+const create = async (req, res) => {
   try {
     const productsArray = req.body;
-    const response = await salesService.salesRegistrer(productsArray);
+    const response = await salesService.create(productsArray);
     if (typeof response.message === 'string') {
       return res.status(response.codigo).json({ message: response.message });
     }
@@ -14,14 +14,14 @@ const sales = async (req, res) => {
   }
 };
 
-const getSales = async (_req, res) => {
-  const response = await salesService.getSales();
+const findAll = async (_req, res) => {
+  const response = await salesService.findAll();
   return res.status(200).json(response);
 };
 
-const getSalesById = async (req, res) => {
+const findAllById = async (req, res) => {
   const { id } = req.params;
-  const response = await salesService.getSalesById(id);
+  const response = await salesService.findAllById(id);
   return res.status(response.codigo).json(response.message);
 };
 
@@ -36,8 +36,8 @@ const updateSale = async (req, res) => {
 };
 
 module.exports = {
-sales,
-getSales,
+create,
+findAll,
 updateSale,
-getSalesById,
+findAllById,
 };

@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-const salesRegistrer = async (date) => {
+const create = async (date) => {
   const [newSale] = await connection
     .query('INSERT INTO StoreManager.sales (date) VALUES (?)',
     [date]);
@@ -10,7 +10,6 @@ const salesRegistrer = async (date) => {
 };
 
 const salesProductRegistrer = async (salesId, productId, quantity) => {
-  console.log('esta chegando no model SPR');
   const [saledproductRegister] = await connection
     .query('INSERT INTO StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
     [salesId, productId, quantity]);
@@ -24,7 +23,7 @@ const findAll = async () => {
   return salesList;
 };
 
-const getSalesById = async (id) => {
+const findAllById = async (id) => {
   const [saleById] = await connection
     .query(`SELECT date, product_id AS productId, quantity FROM StoreManager.sales D 
     INNER JOIN StoreManager.sales_products P ON D.id = P.sale_id WHERE id = ?`,
@@ -42,9 +41,9 @@ const updateSale = async (saleId, productId, quantity) => {
 };
 
 module.exports = {
-  salesRegistrer,
+  create,
   salesProductRegistrer,
   findAll,
-  getSalesById,
+  findAllById,
   updateSale,
 };

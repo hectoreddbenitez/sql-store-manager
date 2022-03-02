@@ -16,10 +16,10 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.get('/sales', salesControllers.getSales);
-app.get('/sales/:id', salesControllers.getSalesById);
+app.get('/sales', salesControllers.findAll);
+app.get('/sales/:id', salesControllers.findAllById);
 app.use('/sales', ...salesMiddleware);
-app.post('/sales', salesControllers.sales);
+app.post('/sales', salesControllers.create);
 app.put('/sales/:id', salesControllers.updateSale);
 
 app.get('/products', productsControllers.findAll);

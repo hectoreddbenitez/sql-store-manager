@@ -10,7 +10,6 @@ const validQuantity = async (req, res, next) => {
 
 const quantityNotNull = async (req, res, next) => { 
   const productsArray = req.body;
-  console.log({ productsArray });
   const notQuantityFound = await productsArray
     .find((products) => products.quantity === undefined);
     if (notQuantityFound) {

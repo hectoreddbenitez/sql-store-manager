@@ -11,14 +11,14 @@ const idValidator = async (response) => {
    }
 };
 
-const salesRegistrer = async (productsArray) => {
+const create = async (productsArray) => {
   const responseMap = await productsArray
   .map(async (product) => productsModels.findById(product.productId));
   const promiseSolvedResponseMap = await Promise.all(responseMap);
   const notValidId = await idValidator(promiseSolvedResponseMap);
   if (notValidId) return notValidId;
 
-  const { id } = await salesModel.salesRegistrer(new Date());
+  const { id } = await salesModel.create(new Date());
   // CUIDADO!!! num array de promises tem que esperar todas as promises. Deve ser utilizado Promise.all!
   await Promise.all(productsArray.map(async ({ productId, quantity }) => salesModel
   .salesProductRegistrer(id, productId, quantity)));
@@ -28,13 +28,13 @@ const salesRegistrer = async (productsArray) => {
   };
 };
 
-const getSales = async () => {
+const findAll = async () => {
   const salesList = await salesModel.findAll();
   return salesList;
 };
 
-const getSalesById = async (id) => {
-  const salesList = await salesModel.getSalesById(id);
+const findAllById = async (id) => {
+  const salesList = await salesModel.findAllById(id);
   if (salesList.length === 0) {
     return {
       codigo: 404,
@@ -63,8 +63,8 @@ const updateSale = async (id, productsArray) => {
 };
 
 module.exports = {
-  salesRegistrer,
+  create,
   updateSale,
-  getSales,
-  getSalesById,
+  findAll,
+  findAllById,
 };

@@ -19,7 +19,6 @@ describe('Testando camada de models, CADASTRO DE PRODUTOS', () => {
   
       it('responder com um objeto com o produto cadastrado', async () => {
         const response = await productsModels.create(payloadProduct.name, payloadProduct.quantity);
-        console.log(response)
   
         expect(response).to.be.a('object');
         expect(response).to.have.a.property('id', 1);
@@ -44,7 +43,6 @@ describe('Testando LISTAGEM DE PRODUTOS', () => {
 
     it('responder com um array vazio', async () => {
       const response = await productsModels.findAll();
-      console.log(response)
 
       expect(response).to.be.an('array');
       expect(response).to.be.empty;
@@ -190,7 +188,7 @@ describe('Testando camada de models, DELETE PRODUTOS', () => {
 //     });
 
 //     it('responder com um objeto com a venda cadastrada', async () => {
-//       const response1 = await salesModels.salesRegistrer(new Date());
+//       const response1 = await salesModels.create(new Date());
 //       const response2 = await salesModels.salesProductRegistrer(response1.id, payloadSales);
 
 //       expect(response2).to.be.a('object');

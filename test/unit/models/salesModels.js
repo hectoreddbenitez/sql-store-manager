@@ -59,7 +59,7 @@ describe('Camada salesModels, testando LISTAGEM DE VENDAS pelo Id', () => {
     });
 
     it('responder com um array não vazio', async () => {
-      const response = await salesModels.getSalesById();
+      const response = await salesModels.findAllById();
 
       expect(response).to.be.an('array');
 
